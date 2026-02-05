@@ -193,7 +193,7 @@ else:
             precautions = r.get("precautions", "")
             if isinstance(precautions, str) and precautions.strip():
                 st.warning(precautions)
-✅ visits.json (fichier initial)
+# visits.json (fichier initial)
 Crée un fichier visits.json dans le même dossier que app.py (app/visits.json) avec ce contenu :
 
 {
