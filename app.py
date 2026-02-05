@@ -96,19 +96,9 @@ def load_melanges():
 # --------------------------------------------------
 # Comptage de la visite (1 fois par session)
 # --------------------------------------------------
-if "visit_counted" not in st.session_state:
-    st.session_state.visit_counted = True
-    visits = count_visit()
-else:
-    # lecture simple (si le fichier existe)
-    if COUNTER_FILE.exists():
-        try:
-            visits = json.loads(COUNTER_FILE.read_text(encoding="utf-8")).get("visits", 0)
-        except Exception:
-            visits = 0
-    else:
-        visits = 0
-
+if "visits" not in st.session_state:
+    st.session_state.visits = count_visit()
+visits = st.session_state.visits
 # --------------------------------------------------
 # Données
 # --------------------------------------------------
