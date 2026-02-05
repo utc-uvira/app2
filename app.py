@@ -28,7 +28,7 @@ COUNTER_FILE = APP_DIR / "visits.json"
 def count_visit() -> int:
     """
     Incrémente un compteur global dans visits.json.
-    Compte 1 fois par session (piloté via st.session_state plus bas).
+    Compte 1 fois par session (piloté via st.session_state).
     """
     if COUNTER_FILE.exists():
         try:
@@ -99,6 +99,7 @@ def load_melanges():
 if "visits" not in st.session_state:
     st.session_state.visits = count_visit()
 visits = st.session_state.visits
+
 # --------------------------------------------------
 # Données
 # --------------------------------------------------
@@ -107,9 +108,7 @@ melanges = load_melanges()
 # --------------------------------------------------
 # Extraction et normalisation des objectifs
 # --------------------------------------------------
-# Map : objectif_normalisé -> libellé original
 objectif_map = {}
-
 for m in melanges:
     for obj in m.get("objectifs", []):
         if isinstance(obj, str):
@@ -183,8 +182,3 @@ else:
             precautions = r.get("precautions", "")
             if isinstance(precautions, str) and precautions.strip():
                 st.warning(precautions)
-# visits.json (fichier initial)
-# Crée un fichier visits.json dans le même dossier que app.py (app/visits.json) avec ce contenu :
-{
-  "visits": 0
-}
